@@ -5,14 +5,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
+// logging
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class videoDate {
+
+class videoDate {
+    private static final String TAG = "videoDate";
+    private static final FormatVideoData VideoData = new FormatVideoData();
+    private static final FormatVideoData.owner ownerData= new FormatVideoData.owner();
+    private static final FormatVideoData.stat statData=new FormatVideoData.stat();
 
     public static JSONObject httpRequest(String requestUrl, String requestMethod){
+        Logger logger = Logger.getGlobal();
 
-        Logger logger = Logger.getLogger("getVideoData-logger");
         JSONObject jsonObject = null;
         StringBuffer buffer = new StringBuffer();
 
@@ -46,16 +52,49 @@ public class videoDate {
             httpURLConnection.disconnect();
             jsonObject = JSONObject.fromObject(buffer.toString());
         }catch (Exception e){
+            logger.warning("HttpURLConnection");
             e.printStackTrace();
         }
         return jsonObject;
     }
+
     public static void main(String[] args) {
+        Logger logger = Logger.getGlobal();
+
         String BVID="BV1WK4y1L7ot";
+        jsonStrToJava(BVID);
+        logger.info(VideoData.toString());
+
+
+    }
+
+
+    public static void jsonStrToJava(String BVID){
+        Logger logger = Logger.getGlobal();
         String url = "http://api.bilibili.com/x/web-interface/view?bvid="+BVID;
-        String HR = httpRequest(url,"GET").getString("data");
-        //String stat = HR.
-        System.out.println(HR);
+        JSONObject jsonObjectData = httpRequest(url,"GET").getJSONObject("data");
+
+        //logger.info(jsonObjectData+" ");
+        VideoData.setBvid((String) jsonObjectData.get("bvid"));
+        VideoData.setAvid((Integer) jsonObjectData.get("aid"));
+        VideoData.setVideos((Integer) jsonObjectData.get("videos"));
+        VideoData.setPic((String) jsonObjectData.get("pic"));
+        VideoData.setTitle((String) jsonObjectData.get("title"));
+        VideoData.setPubdate((String) jsonObjectData.get("desc"));
+
+        JSONObject jsonObjectOwner = jsonObjectData.getJSONObject("owner");
+        ownerData.setMid((Integer) jsonObjectOwner.get("mid"));
+        ownerData.setName((String) jsonObjectOwner.get("name"));
+        ownerData.setFace((String) jsonObjectOwner.get("face"));
+
+        JSONObject jsonObjectStat = jsonObjectData.getJSONObject("stat");
+        statData.setView(jsonObjectStat.getInt("view"));
+        statData.setDanmaku(jsonObjectStat.getInt("danmaku"));
+        statData.setReply(jsonObjectStat.getInt("reply"));
+        statData.setLike(jsonObjectStat.getInt("like"));
+        statData.setCoin(jsonObjectStat.getInt("coin"));
+        statData.setFavorite(jsonObjectStat.getInt("favorite"));
+        statData.setShare(jsonObjectStat.getInt("share"));
 
     }
 }
