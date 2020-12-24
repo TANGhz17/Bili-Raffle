@@ -48,23 +48,6 @@ public class videoDate {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-        /*
-        //根据网址和参数实例化URL
-        URL url = new URL("http://api.bilibili.com/x/web-interface/view?bvid="+bvid);
-        //打开url的Connection连接
-        URLConnection connection = url.openConnection();
-
-        //获取连接的输入流
-        InputStream inputStream=connection.getInputStream();                        //根据连接获取输入流
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);   //将输入流转化为字符流
-        BufferedReader bufferedReader=new BufferedReader(inputStreamReader);        //将输入字符流包装，以便使用
-        String rl = bufferedReader.readLine();
-        logger.info(rl);
-        */
-
-
         return jsonObject;
     }
     public static void main(String[] args) {
