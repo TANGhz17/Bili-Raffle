@@ -45,9 +45,6 @@ public class FileJsoup {
         }
 
         System.out.println("");
-        /*for (int i=0; i<xings.length;i++){
-            System.out.println(xings[i]);
-        }*/
 
         int total=2;
         for(int i = 0; i < total; i++){
@@ -55,14 +52,6 @@ public class FileJsoup {
             int num=rand.nextInt(strings.length);
             System.out.println("第"+(i+1)+"位中奖的是："+"@"+strings[num]);
         }
-        //System.out.println("第1位中奖的是："+"@"+"狐の子");
-        //System.out.println("第2位中奖的是："+"@"+"潜影贝12号");
-        //随机抽取数组中一个值
-        //Random rand=new Random();
-        //int num=rand.nextInt(strings.length);
-        //输出获奖人名
-        //System.out.println("");
-        //System.out.println("共有"+strings.length+"人"+"而中奖的是："+"@"+strings[num]);
     }
 
 
