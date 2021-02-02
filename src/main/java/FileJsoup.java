@@ -12,17 +12,11 @@ public class FileJsoup {
         //读取含有参与人员的html文本
         Document doc = Jsoup.parse(new File("lib/list.html"),"utf-8");
 
-        //Document doc1 = Jsoup.parse(new File("lib/list1.html"),"utf-8");
-
         //筛选出名单保存
         String element=doc.select("a.name ").text();
 
-        //String xinguanzhu=doc1.select("class.vip-name-check fans-name ").text();
-
         //按空格分割element字符串，放入新的字符串数组
         String[] strings=element.split(" ");
-
-        //String[] xings=xinguanzhu.split(" ");
 
         //字符串数组查重
         Set set=new TreeSet();
@@ -45,6 +39,7 @@ public class FileJsoup {
         }
 
         System.out.println("");
+        System.out.println("共"+strings.length+"人参与抽奖");
 
         int total=2;
         for(int i = 0; i < total; i++){
