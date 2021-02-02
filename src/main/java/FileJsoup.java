@@ -38,7 +38,7 @@ public class FileJsoup {
             }
         }
 
-        System.out.println("");
+        System.out.println();
         System.out.println("共"+strings.length+"人参与抽奖");
 
         int total=2;
